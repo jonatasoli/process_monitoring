@@ -47,10 +47,17 @@ class StatusProcessViewSet(viewsets.ViewSet):
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def destroy(self, request, pk=None):
+    def destroy(self, request, *args, **kwargs):
         """Deleting an object."""
 
-        return Response({'http_method': 'DELETE'})
+        process = models.StatusProcess.objects.all().filter(pk=kwargs['pk'])
+        id_process = process.values()[0]['id_process']
+
+        process.delete()
+
+        message = 'Processo {0} deletado!'.format(id_process)
+
+        return Response({'message': message})
 
 
 class UserProfileViewSet(viewsets.ModelViewSet):
