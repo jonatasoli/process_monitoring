@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<table class="table">
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>Usuário</td>
+      <td>Id. do processo</td>
+      <td>Status</td>
+    </tr>
+  </thead>
+
+  <tbody>
+
+  {% for process in processes %}
+    <tr>
+        <td>{{ process.id }}</td>
+        <td>{{ process.user_profile }}</td>
+        <td>{{ process.id_process }}</td>
+        <td>{{ process.status_process }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}
