@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
+from django.db.models import signals
+import requests
 
 
 class UserProfileManager(BaseUserManager):
@@ -78,3 +80,26 @@ class StatusProcess(models.Model):
     def __str__(self):
         """Return the model as a string."""
         return self.status_process
+
+
+def status_post_save(signal, instance, sender, **kwargs):
+    """Trigger to send post to client url"""
+
+    user = UserProfile.objects.all().filter(pk=instance.user_profile_id)
+    dict_process = {}
+
+    dict_process['processo'] = instance.id_process
+    dict_process['status'] = instance.status_process
+
+    post_data = dict_process
+    url = user.values()[0]['url']
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "*/*"
+    }
+
+    response = requests.post(url, data=post_data, headers=headers)
+    print(response)
+
+
+signals.post_save.connect(status_post_save, sender=StatusProcess)
