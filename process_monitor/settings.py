@@ -31,7 +31,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'test_without_migrations',
     'django_extensions',
-#    'core',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -111,3 +113,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+AUTH_USER_MODEL = 'core.UserProfile'
