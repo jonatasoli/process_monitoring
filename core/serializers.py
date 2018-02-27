@@ -31,4 +31,6 @@ class StatusProcessSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.StatusProcess
         fields = ('id', 'user_profile', 'id_process', 'status_process')
-        extra_kwargs = {'user_profile': {'read_only': True}}
+
+
+extra_kwargs = {'user_profile': {'read_only': True}}
