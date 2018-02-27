@@ -14,7 +14,7 @@ Sistema de Monitoramento de processos.
 
 
 ``` console
-git clone https://github.com/jonatasoli/eventex.git monitoring
+git clone https://github.com/jonatasoli/.process_monitoring.git monitoring
 cd wttd
 python -m venv .monitoring
 source .monitoring/bin/activate
